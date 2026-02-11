@@ -139,6 +139,48 @@ flowchart TD
     
     classDef default fill:#000000,stroke:#ffffff,stroke-width:2px
 ```
+## Data Flow 
 
+```mermaid
+sequenceDiagram
+    participant User as End User
+    participant Browser as Web Browser
+    participant Server as Flask Server
+    participant Compiler as Compiler Engine
+    participant DB as Database
+    participant Cache as Redis Cache
+    participant Storage as File Storage
+    
+    User->>Browser: Write PahadiScript Code
+    Browser->>Server: POST /compiler/run
+    Server->>Compiler: Validate Request
+    
+    activate Compiler
+    Compiler->>Compiler: Lexical Analysis
+    Compiler->>Compiler: Syntax Parsing
+    Compiler->>Compiler: Semantic Analysis
+    Compiler->>Compiler: Code Execution
+    deactivate Compiler
+    
+    Compiler->>DB: Log Run History
+    Compiler->>DB: Update Analytics
+    Compiler->>Cache: Cache Results
+    
+    DB-->>Compiler: Return Success
+    Cache-->>Compiler: Cache Updated
+    
+    Compiler-->>Server: Return Results
+    Server-->>Browser: JSON Response
+    Browser-->>User: Display Output
+    
+    User->>Browser: Click Save
+    Browser->>Server: POST /programs/create
+    Server->>DB: Store Program
+    Server->>Storage: Create Backup
+    DB-->>Server: Confirm Save
+    Storage-->>Server: Backup Complete
+    Server-->>Browser: Success Response
+    Browser-->>User: Show Confirmation
+```
 
 
