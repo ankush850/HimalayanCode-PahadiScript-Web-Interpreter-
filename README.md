@@ -143,20 +143,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    You[ You<br>Type PahadiScript code]
+    Dashboard[Dashboard<br>Type PahadiScript code]
     Lexer[ Lexer<br>Tokenizes code]
     Interpreter[ INTERPRETER<br>Parses & Executes Immediately]
     Memory[ Symbol Table<br>Variable storage]
     Output[ Output Collector]
     Console[ Console Display]
 
-    You -- "1. Code" --> Lexer
+    Dashboard -- "1. Code" --> Lexer
     Lexer -- "2. Tokens" --> Interpreter
     Interpreter -- "3a. Store/Get values" --> Memory
     Memory -- "3b. Variable data" --> Interpreter
     Interpreter -- "4. Execute & Get results" --> Output
     Output -- "5. Final output" --> Console
-    Console -- "6. Show results" --> You
+    Console -- "6. Show results" --> Dashboard
 ```
 
 
