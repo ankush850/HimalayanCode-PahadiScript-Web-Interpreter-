@@ -59,85 +59,31 @@ flowchart TD
 ##  Detail Architecture Diagram
 
 ```mermaid
-flowchart TD
-    Client[Client Layer]
-    Presentation[Presentation Layer]
-    Application[Application Layer]
-    Service[Service Layer]
-    Data[Data Layer]
-    Storage[Storage Layer]
+graph TD
+    User([User])
+    Browser[ Browser<br/>Web Interface]
+    Flask[ Flask Server<br/>Python Backend]
+    Interpreter[PahadiScript Interpreter]
+    Lexer[ Lexer<br/>Token Reader]
+    Parser[ Parser<br/>Grammar Rules]
+    Eval[ Evaluator<br/>_evaluate function]
+    SymbolTable[ Symbol Table<br/>Variable Memory]
     
-    Client --> Presentation
-    Presentation --> Application
-    Application --> Service
-    Service --> Data
-    Data --> Storage
+    User --> Browser
+    Browser -->|HTTP Request| Flask
+    Flask -->|Code String| Interpreter
     
-    subgraph Client
-        Browser[Web Browser]
-        Mobile[Mobile App]
-        API[API Clients]
-    end
+    Interpreter --> Lexer
+    Interpreter --> Parser
+    Interpreter --> Eval
+    Interpreter --> SymbolTable
     
-    subgraph Presentation
-        WebServer[Flask Server]
-        Templates[Jinja2 Templates]
-        Static[Static Files]
-    end
-    
-    subgraph Application
-        Lexer[Lexical Analyzer]
-        Parser[Syntax Parser]
-        Executor[Code Executor]
-        Auth[Authentication]
-        Profile[Profile Management]
-    end
-    
-    subgraph Service
-        UserService[User Service]
-        CompilerService[Compiler Service]
-        StorageService[Storage Service]
-    end
-    
-    subgraph Data
-        ORM2[SQLAlchemy ORM]
-        Cache2[Redis Cache]
-        Search2[ElasticSearch]
-    end
-    
-    subgraph Storage
-        DB2[SQLite Database]
-        Files2[File System]
-        NormalStorage[Normal Storage]
-    end
-    
-    Browser --> WebServer
-    Mobile --> WebServer
-    API --> WebServer
-    
-    WebServer --> Templates
-    WebServer --> Static
-    
-    WebServer --> Lexer
-    Lexer --> Parser
-    Parser --> Executor
-    WebServer --> Auth
-    Auth --> Profile
-    
-    Lexer --> ORM2
-    Parser --> ORM2
-    Executor --> ORM2
-    Auth --> ORM2
-    Profile --> ORM2
-    
-    ORM2 --> DB2
-    ORM2 --> Cache2
-    ORM2 --> Search2
-    
-    Profile --> Files2
-    Static --> NormalStorage
-    
-    classDef default fill:#000000,stroke:#ffffff,stroke-width:2px
+    Lexer -->|Tokens| Parser
+    Parser -->|AST| Eval
+    Eval -->|Read/Write| SymbolTable
+    Eval -->|Results| Flask
+    Flask -->|HTTP Response| Browser
+    Browser -->|Display| User
 ```
 ## Data Flow 
 
