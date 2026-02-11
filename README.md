@@ -106,3 +106,35 @@ flowchart TD
 ```
 
 
+
+---
+
+
+## 📚 Language Specification (Keywords)
+
+PahadiScript consists of 20 reserved keywords that map to standard C-style operations:
+
+| Keyword | C Equivalent | Purpose |
+| :--- | :--- | :--- |
+| `shuru` | `main` | Entry point of the script |
+| `le` | `var/auto` | General variable declaration |
+| `ank` | `int` | Integer data type |
+| `naap` | `float` | Floating point data type |
+| `akshar` | `char` | Character data type |
+| `bol` | `printf` | Standard output |
+| `sun` | `scanf` | Standard input |
+| `agar` | `if` | Conditional branch |
+| `magar` | `else` | Alternative branch |
+| `phir` | `for` | Iterative loop |
+| `jabtak` | `while` | Conditional loop |
+| `bas` | `break` | Terminate loop |
+| `chalo` | `continue` | Skip iteration |
+| `kaam` | `function` | Function definition |
+| `paucha` | `return` | Return value from function |
+| `sahi` | `true` | Boolean True |
+| `galat` | `false` | Boolean False |
+| `khali` | `void` | Null/No return type |
+| `roko` | `exit` | Terminate program execution |
+| `dhancha` | `struct` | Custom data structure |
+
+---
