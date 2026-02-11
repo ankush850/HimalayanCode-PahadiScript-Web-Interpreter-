@@ -142,45 +142,21 @@ flowchart TD
 ## Data Flow 
 
 ```mermaid
-sequenceDiagram
-    participant User as End User
-    participant Browser as Web Browser
-    participant Server as Flask Server
-    participant Compiler as Compiler Engine
-    participant DB as Database
-    participant Cache as Redis Cache
-    participant Storage as File Storage
-    
-    User->>Browser: Write PahadiScript Code
-    Browser->>Server: POST /compiler/run
-    Server->>Compiler: Validate Request
-    
-    activate Compiler
-    Compiler->>Compiler: Lexical Analysis
-    Compiler->>Compiler: Syntax Parsing
-    Compiler->>Compiler: Semantic Analysis
-    Compiler->>Compiler: Code Execution
-    deactivate Compiler
-    
-    Compiler->>DB: Log Run History
-    Compiler->>DB: Update Analytics
-    Compiler->>Cache: Cache Results
-    
-    DB-->>Compiler: Return Success
-    Cache-->>Compiler: Cache Updated
-    
-    Compiler-->>Server: Return Results
-    Server-->>Browser: JSON Response
-    Browser-->>User: Display Output
-    
-    User->>Browser: Click Save
-    Browser->>Server: POST /programs/create
-    Server->>DB: Store Program
-    Server->>Storage: Create Backup
-    DB-->>Server: Confirm Save
-    Storage-->>Server: Backup Complete
-    Server-->>Browser: Success Response
-    Browser-->>User: Show Confirmation
+flowchart TD
+    You[ You<br>Type PahadiScript code]
+    Lexer[ Lexer<br>Tokenizes code]
+    Interpreter[ INTERPRETER<br>Parses & Executes Immediately]
+    Memory[ Symbol Table<br>Variable storage]
+    Output[ Output Collector]
+    Console[ Console Display]
+
+    You -- "1. Code" --> Lexer
+    Lexer -- "2. Tokens" --> Interpreter
+    Interpreter -- "3a. Store/Get values" --> Memory
+    Memory -- "3b. Variable data" --> Interpreter
+    Interpreter -- "4. Execute & Get results" --> Output
+    Output -- "5. Final output" --> Console
+    Console -- "6. Show results" --> You
 ```
 
 
